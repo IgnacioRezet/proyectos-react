@@ -1,14 +1,29 @@
-import React from "react";
+import {useEffect,useState} from 'react'
 import Error from "./Error";
 
 
-const Formulario=({ pacientes, setPacientes})=>{
-    const[nombre, setNombre] = React.useState('');
-    const[propietario, setPropietario] = React.useState('');
-    const[email, setEmail] = React.useState('');
-    const[fecha, setFecha] = React.useState('');
-    const[sintomas, setSintomas] = React.useState('');
-    const[error, setError] = React.useState(false);
+const Formulario=({ pacientes, setPacientes, paciente})=>{
+    const[nombre, setNombre] = useState('');
+    const[propietario, setPropietario] = useState('');
+    const[email, setEmail] = useState('');
+    const[fecha, setFecha] = useState('');
+    const[sintomas, setSintomas] = useState('');
+    const[error, setError] = useState(false);
+
+    useEffect(()=> {
+        if(Object.keys(paciente).length>0){ //para verificar si hay algo en el objeto paciente
+            setNombre(paciente.nombre);
+            setPropietario(paciente.propietario);
+            setEmail(paciente.email);
+            setFecha(paciente.fecha);
+            setSintomas(paciente.sintomas);
+        }
+
+    }, [paciente]);
+
+    // useEffect(()=> {
+
+    // }, []);
 
     const getID=()=>{
         const random = Math.random().toString(36).substr(2);
