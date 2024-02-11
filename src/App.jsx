@@ -1,6 +1,6 @@
-import Formulario from "./Formulario"
-import ListadoPacientes from "./ListadoPacientes"
-import Header from "./header"
+import Formulario from "./components/Formulario"
+import ListadoPacientes from "./components/ListadoPacientes"
+import Header from "./components/Header"
 import {useEffect,useState} from 'react'
 
 
@@ -9,15 +9,21 @@ function App() {
   const [paciente, setPaciente] = useState({});
 
   useEffect(() => {
-    const obtenerLS=()=>{
+    const LS=()=>{
       const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? [];
+     
       setPacientes(pacientesLS);
-    }
-    obtenerLS();
-  },[]);
+      console.log(pacientes);
+    };
+    LS();
+    
+  }, []);
+
 
   useEffect(() => {   
-    localStorage.setItem('pacientes', JSON.stringify(pacientes));
+     localStorage.setItem('pacientes', JSON.stringify(pacientes));
+    // console.log(JSON.stringify(pacientes));
+   
   }, [pacientes])
 
   const eliminarPaciente=(id)=>{
